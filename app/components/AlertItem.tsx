@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import { AlertData } from "../data/alertItemData";
+import { AlertItemData } from "../data/alertItemData";
 
-export default function AlertItem({ alert, index }: { alert: AlertData; index: number }) {
+export default function AlertItem({ alert, index }: { alert: AlertItemData; index: number }) {
     return (
         <motion.div className="bg-slate-800/50 p-3 rounded-lg flex items-center space-x-3"
             initial={{ opacity: 0, x: -20 }}
