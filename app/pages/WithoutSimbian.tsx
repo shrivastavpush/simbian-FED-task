@@ -80,20 +80,23 @@ export default function WithoutSimbian() {
                             }
                         }}
                     >
-                        {contentDataWithoutSimbian.map((data, idx) => (
-                            <motion.div
-                                key={data.title}
-                                initial={{ opacity: 0, x: -30 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: 0.2 + idx * 0.12, ease: "easeOut" }}
-                            >
-                                <ContentCard
-                                    title={data.title}
-                                    className={data.className}
-                                    icon={<data.icon size={24} className="text-red-600" />}
-                                />
-                            </motion.div>
-                        ))}
+                        {contentDataWithoutSimbian.map((data, idx) => {
+                            const Icon = data.icon;
+                            return (
+                                <motion.div
+                                    key={data.title}
+                                    initial={{ opacity: 0, x: -30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5, delay: 0.2 + idx * 0.12, ease: "easeOut" }}
+                                >
+                                    <ContentCard
+                                        title={data.title}
+                                        className={data.className}
+                                        icon={<Icon size={24} className="text-red-600" />}
+                                    />
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
 
                     {/* alert boxes */}

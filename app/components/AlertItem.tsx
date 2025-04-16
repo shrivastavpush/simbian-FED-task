@@ -10,7 +10,19 @@ export default function AlertItem({ alert, index }: { alert: AlertItemData; inde
             transition={{ delay: index * 0.1 }}
             layout
         >
-            <div className={`w-2 h-2 rounded-full ${alert.severity === "high" ? "bg-red-500" : alert.severity === "medium" ? "bg-yellow-500" : "bg-blue-500"}`} />
+            <div className="flex items-center gap-2">
+                <div className="" />
+                {alert.icon && (() => {
+                    const Icon = alert.icon;
+                    return <Icon size={18} className={
+                        alert.severity === "high"
+                            ? "text-red-400"
+                            : alert.severity === "medium"
+                                ? "text-yellow-400"
+                                : "text-blue-400"
+                    } />;
+                })()}
+            </div>
             <div>
                 <div className="font-medium">{alert.title}</div>
                 <div className="text-xs text-gray-400">{alert.timestamp}</div>

@@ -1,9 +1,20 @@
+import { IconType } from "react-icons";
+import { MdError, MdWarning, MdInfo } from "react-icons/md";
+
 export interface AlertItemData {
 	title: string;
 	severity: string;
-	timestamp?: string
-	id?: string
+	icon?: IconType;
+	timestamp?: string;
+	id?: string;
 }
+
+// Map severity to icon
+export const severityIconMap: Record<string, IconType> = {
+	high: MdError,
+	medium: MdWarning,
+	low: MdInfo,
+};
 
 const alertItemTypes: AlertItemData[] = [
 	{ title: "Phishing Email", severity: "high" },
@@ -26,6 +37,7 @@ export function getRandomAlert() {
 		id: Math.random().toString(36).substring(2, 11),
 		title: alertType.title,
 		severity: alertType.severity,
+		icon: severityIconMap[alertType.severity],
 		timestamp: `${now.getHours()}:${now
 			.getMinutes()
 			.toString()
