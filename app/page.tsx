@@ -11,14 +11,9 @@ export default function Home() {
     return (
         <main className="min-h-screen bg-blue-950 text-white overflow-x-hidden">
             <div className="container mx-auto px-4 py-8">
-                <motion.h1
-                    className="text-4xl md:text-5xl font-bold text-center mb-8"
-                    initial={{ opacity: 0, y: -50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
-                >
+                <h1 className="text-4xl md:text-5xl font-bold text-center mb-8" >
                     Security Operations Experience
-                </motion.h1>
+                </h1>
 
                 <div className="flex justify-center mb-8">
                     <div className="bg-slate-800 p-1 rounded-lg flex">

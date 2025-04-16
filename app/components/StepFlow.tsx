@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { steps } from '../utils/stepsData'
+import { steps } from '../data/stepsData'
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const StepFlow = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -17,25 +18,18 @@ const StepFlow = () => {
     }, []);
 
     return (
-        <div className="relative mb-14">
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-700 -translate-y-1/2 z-0" />
+        <div className="relative mb-6 md:mb-14 px-4 md:px-0bg-green-900/30 p-4 md:p-6 rounded-lg z-10 ">
+            <div className="hidden md:block absolute top-[57%] left-0 w-full h-1 bg-gray-700 -translate-y-1/2 z-0" />
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 {steps.map((step, index) => (
                     <motion.div
                         key={step.title}
-                        className={`${step.color} p-6 rounded-lg relative z-10 ${activeStep === index ? "ring-2 ring-offset-2 ring-offset-slate-900 ring-green-500" : ""
+                        className={`${step.color} p-4 md:p-6 rounded-lg relative z-10 ${activeStep === index ? "ring-2 ring-offset-2 ring-offset-slate-900 ring-green-500" : ""
                             }`}
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{
-                            opacity: 1,
-                            y: 0,
-                            scale: activeStep === index ? 1.05 : 1
-                        }}
-                        transition={{
-                            delay: index * 0.1,
-                            duration: 0.3
-                        }}
+                        animate={{ opacity: 1, y: 0, scale: activeStep === index ? 1.05 : 1 }}
+                        transition={{ delay: index * 0.1, duration: 0.3 }}
                     >
                         <div className="flex flex-col items-center text-center">
                             <div className="mb-3"><step.icon size={24} className={step.iconClassName} /></div>
@@ -44,10 +38,8 @@ const StepFlow = () => {
                         </div>
 
                         {index < steps.length - 1 && (
-                            <div className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 z-20">
-                                <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
+                            <div className="hidden md:block absolute top-[57%] right-0 -translate-y-1/2 translate-x-1/2 z-20">
+                                <MdKeyboardArrowRight size={26} className="text-gray-400" />
                             </div>
                         )}
                     </motion.div>

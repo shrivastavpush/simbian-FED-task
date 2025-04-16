@@ -1,11 +1,10 @@
 "use client";
-
-import { AlertData } from "../utils/alertData";
+import { motion } from "framer-motion";
+import { AlertData } from "../data/alertItemData";
 
 export default function AlertItem({ alert, index }: { alert: AlertData; index: number }) {
     return (
-        <div
-            className="bg-slate-800/50 p-3 rounded-lg flex items-center space-x-3"
+        <motion.div className="bg-slate-800/50 p-3 rounded-lg flex items-center space-x-3"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, y: 20 }}
@@ -17,6 +16,6 @@ export default function AlertItem({ alert, index }: { alert: AlertData; index: n
                 <div className="font-medium">{alert.title}</div>
                 <div className="text-xs text-gray-400">{alert.timestamp}</div>
             </div>
-        </div>
+        </motion.div>
     );
 }

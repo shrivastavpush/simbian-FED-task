@@ -1,11 +1,11 @@
-export interface AlertData {
+export interface AlertItemData {
 	title: string;
 	severity: string;
 	timestamp?: string
 	id?: string
 }
 
-const alertTypes: AlertData[] = [
+const alertItemTypes: AlertItemData[] = [
 	{ title: "Phishing Email", severity: "high" },
 	{ title: "Suspicious Login", severity: "high" },
 	{ title: "Malware Detected", severity: "high" },
@@ -19,7 +19,7 @@ const alertTypes: AlertData[] = [
 ];
 
 export function getRandomAlert() {
-	const alertType = alertTypes[Math.floor(Math.random() * alertTypes.length)];
+	const alertType = alertItemTypes[Math.floor(Math.random() * alertItemTypes.length)];
 	const now = new Date();
 
 	return {
