@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import AlertItem from "./AlertItem";
 import AnimationCounter from "./AnimationCounter";
@@ -30,14 +30,19 @@ export default function AlertCard(
                 <AnimationCounter from={countStart} to={countEnd} nodeRef={nodeRef} />
             </div>
 
-
-            <div className="space-y-2 max-h-52 overflow-y-auto">
+            <div className="space-y-2 max-h-52 overflow-y-auto mt-4">
                 <AnimatePresence>
                     {withSimbian ? (
-                        <div className="flex items-center justify-center h-10 text-green-400 gap-2 py-4">
-                            < FaRegCheckCircle size={24} />
+                        <motion.div
+                            key="clear"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="flex items-center justify-center h-10 text-green-400 gap-2 py-4"
+                        >
+                            <FaRegCheckCircle size={24} />
                             All Clear
-                        </div>
+                        </motion.div>
                     ) : (
                         alerts.map((alert, index) => (
                             <AlertItem key={alert.id} alert={alert} index={index} />

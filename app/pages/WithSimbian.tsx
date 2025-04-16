@@ -8,7 +8,7 @@ import { WithSimbianAlertCards } from "../data/alertCardData";
 
 export default function WithSimbian() {
     return (
-        <div>
+        <>
             <h2 className="text-3xl font-bold text-center mb-8 text-green-500">
                 With Simbian
             </h2>
@@ -40,12 +40,12 @@ export default function WithSimbian() {
                             countEnd={data.countEnd}
                             icon={<data.icon size={24} className="text-green-600" />}
                             color={data.color}
-                            alerts={data.alerts}
+                            alerts={[]}
                             withSimbian={data.withSimbian}
                         />
                     ))}
                 </div>
             </div>
-        </div>
+        </>
     );
 }

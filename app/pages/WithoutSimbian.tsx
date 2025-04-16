@@ -1,111 +1,111 @@
 "use client";
 
-// import { useState, useEffect } from "react";
-// import AlertCard from "../components/AlertCard";
+import { useState, useEffect } from "react";
+import AlertCard from "../components/AlertCard";
 import ContentCard from "../components/ContentCard";
-// import { getRandomAlert } from "../utils/alertData";
-
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { LuShieldAlert } from "react-icons/lu";
-import { MdOutlineMonitor } from "react-icons/md";
-// import { GoBellSlash } from "react-icons/go";
+import { AlertItemData, getRandomAlert } from "../data/alertItemData";
+import { WithoutSimbianAlertCards } from "../data/alertCardData";
+import { contentDataWithoutSimbian } from "../data/contentData";
 
 export default function WithoutSimbian() {
-    // const [ignoredCount, setIgnoredCount] = useState(200);
-    // const [wronglyClosedCount, setWronglyClosedCount] = useState(35);
-    // const [activeThreatsCount, setActiveThreatsCount] = useState(5);
+    const [ignoredCount, setIgnoredCount] = useState(200);
+    const [wronglyClosedCount, setWronglyClosedCount] = useState(35);
+    const [activeThreatsCount, setActiveThreatsCount] = useState(5);
 
-    // const [ignoredAlerts, setIgnoredAlerts] = useState([]);
-    // const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState([]);
-    // const [activeThreats, setActiveThreats] = useState([]);
+    const [ignoredAlerts, setIgnoredAlerts] = useState(() => [
+        getRandomAlert(), getRandomAlert(), getRandomAlert()
+    ]);
+    const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState(() => [
+        getRandomAlert(), getRandomAlert(), getRandomAlert()
+    ]);
+    const [activeThreats, setActiveThreats] = useState(() => [
+        getRandomAlert(), getRandomAlert(), getRandomAlert()
+    ]);
 
-    // // Add new alerts periodically
-    // useEffect(() => {
-    //     const ignoredInterval = setInterval(() => {
-    //         const newAlert = getRandomAlert();
-    //         setIgnoredAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
-    //         setIgnoredCount(prev => prev + 1);
-    //     }, 5000);
+    // Adding new alerts periodically
+    useEffect(() => {
+        const ignoredInterval = setInterval(() => {
+            const newAlert = getRandomAlert();
+            setIgnoredAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
+            setIgnoredCount(prev => prev + 1);
+        }, 3000);
 
-    //     const wronglyClosedInterval = setInterval(() => {
-    //         const newAlert = getRandomAlert();
-    //         setWronglyClosedAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
-    //         setWronglyClosedCount(prev => prev + 1);
-    //     }, 12000);
+        const wronglyClosedInterval = setInterval(() => {
+            const newAlert = getRandomAlert();
+            setWronglyClosedAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
+            setWronglyClosedCount(prev => prev + 1);
+        }, 5000);
 
-    //     const threatsInterval = setInterval(() => {
-    //         const newAlert = getRandomAlert();
-    //         setActiveThreats(prev => [newAlert, ...prev.slice(0, 4)]);
-    //         setActiveThreatsCount(prev => prev + 1);
-    //     }, 15000);
+        const threatsInterval = setInterval(() => {
+            const newAlert = getRandomAlert();
+            setActiveThreats(prev => [newAlert, ...prev.slice(0, 4)]);
+            setActiveThreatsCount(prev => prev + 1);
+        }, 4000);
 
-    //     // Initialize with some alerts
-    //     setIgnoredAlerts([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
-    //     setWronglyClosedAlerts([getRandomAlert(), getRandomAlert()]);
-    //     setActiveThreats([getRandomAlert(), getRandomAlert()]);
-
-    //     return () => {
-    //         clearInterval(ignoredInterval);
-    //         clearInterval(wronglyClosedInterval);
-    //         clearInterval(threatsInterval);
-    //     };
-    // }, []);
+        return () => {
+            clearInterval(ignoredInterval);
+            clearInterval(wronglyClosedInterval);
+            clearInterval(threatsInterval);
+        };
+    }, []);
 
     return (
-        <div>
+        <>
             <h2 className="text-3xl font-bold text-center mb-8 text-red-500">
                 Without Simbian
             </h2>
 
-            <div className="flex px-10 items-baseline">
+            <div className="flex md:flex-row flex-col px-0 md:px-10 items-baseline justify-around gap-6 md:gap-0">
 
                 {/* sample content messages */}
                 <div className="flex flex-col items-center justify-evenly gap-4 mr-8">
-                    <ContentCard
-                        title="Wasting valuable analyst time on false positives"
-                        className="bg-red-400/10"
-                        icon={<IoMdCloseCircleOutline size={24} className="text-red-600" />}
-                    />
-                    <ContentCard
-                        title="Processing one alert at a time, missing the big picture"
-                        className="bg-red-400/10"
-                        icon={<MdOutlineMonitor size={24} className="text-red-600" />}
-                    />
-                    <ContentCard
-                        title="More time fixing SOAR automation, less time on real threats"
-                        className="bg-red-400/10"
-                        icon={<LuShieldAlert size={24} className="text-red-600" />}
-                    />
+                    {contentDataWithoutSimbian.map((data) => (
+                        <ContentCard
+                            key={data.title}
+                            title={data.title}
+                            className={data.className}
+                            icon={<data.icon size={24} className="text-red-600" />}
+                        />
+                    ))}
                 </div>
 
                 {/* alert boxes */}
 
-                {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    <AlertCard
-                        title="Ignored Alerts"
-                        count={ignoredCount}
-                        icon={<GoBellSlash size={24} color="#FFFFFF" />}
-                        color="bg-red-900/30"
-                        alerts={ignoredAlerts}
-                    />
+                <div className="flex flex-col items-center gap-4">
+                    {WithoutSimbianAlertCards.map((data) => {
+                        let count = 0;
+                        let alerts: AlertItemData[] = [];
 
-                    <AlertCard
-                        title="Wrongly Closed Alerts"
-                        count={wronglyClosedCount}
-                        icon={<IoMdCloseCircleOutline size={24} color="#FFFFFF" />}
-                        color="bg-yellow-900/30"
-                        alerts={wronglyClosedAlerts}
-                    />
+                        switch (data.type) {
+                            case "ignored":
+                                count = ignoredCount;
+                                alerts = ignoredAlerts;
+                                break;
+                            case "wronglyClosed":
+                                count = wronglyClosedCount;
+                                alerts = wronglyClosedAlerts;
+                                break;
+                            case "active":
+                                count = activeThreatsCount;
+                                alerts = activeThreats;
+                                break;
+                        }
 
-                    <AlertCard
-                        title="Active Threats"
-                        count={activeThreatsCount}
-                        icon={<LuShieldAlert size={24} color="#FFFFFF" />}
-                        color="bg-orange-900/30"
-                        alerts={activeThreats}
-                    />
-                </div> */}
+                        return (
+                            <AlertCard
+                                key={data.title}
+                                title={data.title}
+                                countStart={data.countStart}
+                                countEnd={count}
+                                icon={<data.icon size={24} className="text-red-600" />}
+                                color={data.color}
+                                alerts={alerts}
+                                withSimbian={data.withSimbian}
+                            />
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+        </>
     );
 }

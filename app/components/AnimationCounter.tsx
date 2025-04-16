@@ -1,15 +1,16 @@
 import { animate } from "framer-motion";
 import React, { useEffect } from "react";
 
-export default function Counter({ from, to, nodeRef }:
+export default function AnimationCounter({ from, to, nodeRef }:
     {
         from: number;
         to: number;
-        nodeRef: React.RefObject<HTMLDivElement>
+        nodeRef: React.RefObject<HTMLDivElement | null>;
     }) {
 
     useEffect(() => {
         const node = nodeRef.current;
+        if (!node) return;
 
         const controls = animate(from, to, {
             duration: 1,
@@ -19,7 +20,14 @@ export default function Counter({ from, to, nodeRef }:
         });
 
         return () => controls.stop();
-    }, [from, to, nodeRef,]);
+    }, [from, to, nodeRef]);
 
-    return <div className="text-3xl font-bold" ref={nodeRef} />;
+    return (
+        <div
+            className="text-3xl font-bold"
+            ref={nodeRef}
+            aria-live="polite"
+            aria-label={`Count: ${to}`}
+        />
+    );
 }
