@@ -8,44 +8,51 @@ export interface Step {
     title: string;
     description: string;
     icon: IconType;
-    iconClassName: string;
-    color: string;
+    iconColorClass: string;
+    ringColorClass: string;
+    bgColorClass: string;
 }
+
 
 export const steps: Step[] = [
     {
         title: "Triaged & Reported",
         description: "SOC Agent handled investigation and reporting",
         icon: FaRegCheckCircle,
-        iconClassName: "green-500",
-        color: "bg-green-900/30",
+        iconColorClass: "text-green-500",
+        ringColorClass: "ring-green-500",
+        bgColorClass: "bg-green-900/30",
     },
     {
         title: "Automated Response",
         description: "Incident automatically contained",
         icon: HiOutlineBeaker,
-        iconClassName: "blue-500",
-        color: "bg-blue-900/30",
+        iconColorClass: "text-blue-500",
+        ringColorClass: "ring-blue-500",
+        bgColorClass: "bg-blue-900/30",
     },
     {
         title: "Comprehensive Analysis",
         description: "AI recognized patterns",
         icon: BsBarChart,
-        iconClassName: "purple-500",
-        color: "bg-purple-900/30",
+        iconColorClass: "text-purple-500",
+        ringColorClass: "ring-purple-500",
+        bgColorClass: "bg-purple-900/30",
     },
     {
         title: "Accurate Detection",
         description: "Zero false positives",
         icon: IoEyeOutline,
-        iconClassName: "indigo-500",
-        color: "bg-indigo-900/30",
+        iconColorClass: "text-indigo-500",
+        ringColorClass: "ring-indigo-500",
+        bgColorClass: "bg-indigo-900/30",
     },
     {
         title: "24/7 Coverage",
         description: "No analyst fatigue",
         icon: FaRegClock,
-        iconClassName: "teal-500",
-        color: "bg-teal-900/30",
+        iconColorClass: "text-teal-500",
+        ringColorClass: "ring-teal-500",
+        bgColorClass: "bg-teal-900/30",
     },
 ];
