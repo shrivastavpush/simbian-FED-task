@@ -1,13 +1,13 @@
 "use client";
 
-import AlertCard from "../components/AlertCard";
+// import AlertCard from "../components/AlertCard";
 import StepFlow from "../components/StepFlow";
 import ContentCard from "../components/ContentCard";
 
 import { MdOutlineMonitor } from "react-icons/md";
 import { GoShieldCheck } from "react-icons/go";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import { FaCheck } from "react-icons/fa";
+// import { FaCheck } from "react-icons/fa";
 
 export default function WithSimbian() {
     return (

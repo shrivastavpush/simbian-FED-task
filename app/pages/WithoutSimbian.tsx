@@ -1,55 +1,55 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import AlertCard from "../components/AlertCard";
+// import { useState, useEffect } from "react";
+// import AlertCard from "../components/AlertCard";
 import ContentCard from "../components/ContentCard";
-import { getRandomAlert } from "../utils/alertData";
+// import { getRandomAlert } from "../utils/alertData";
 
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { LuShieldAlert } from "react-icons/lu";
 import { MdOutlineMonitor } from "react-icons/md";
-import { GoBellSlash } from "react-icons/go";
+// import { GoBellSlash } from "react-icons/go";
 
 export default function WithoutSimbian() {
-    const [ignoredCount, setIgnoredCount] = useState(200);
-    const [wronglyClosedCount, setWronglyClosedCount] = useState(35);
-    const [activeThreatsCount, setActiveThreatsCount] = useState(5);
+    // const [ignoredCount, setIgnoredCount] = useState(200);
+    // const [wronglyClosedCount, setWronglyClosedCount] = useState(35);
+    // const [activeThreatsCount, setActiveThreatsCount] = useState(5);
 
-    const [ignoredAlerts, setIgnoredAlerts] = useState([]);
-    const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState([]);
-    const [activeThreats, setActiveThreats] = useState([]);
+    // const [ignoredAlerts, setIgnoredAlerts] = useState([]);
+    // const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState([]);
+    // const [activeThreats, setActiveThreats] = useState([]);
 
-    // Add new alerts periodically
-    useEffect(() => {
-        const ignoredInterval = setInterval(() => {
-            const newAlert = getRandomAlert();
-            setIgnoredAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
-            setIgnoredCount(prev => prev + 1);
-        }, 5000);
+    // // Add new alerts periodically
+    // useEffect(() => {
+    //     const ignoredInterval = setInterval(() => {
+    //         const newAlert = getRandomAlert();
+    //         setIgnoredAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
+    //         setIgnoredCount(prev => prev + 1);
+    //     }, 5000);
 
-        const wronglyClosedInterval = setInterval(() => {
-            const newAlert = getRandomAlert();
-            setWronglyClosedAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
-            setWronglyClosedCount(prev => prev + 1);
-        }, 12000);
+    //     const wronglyClosedInterval = setInterval(() => {
+    //         const newAlert = getRandomAlert();
+    //         setWronglyClosedAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
+    //         setWronglyClosedCount(prev => prev + 1);
+    //     }, 12000);
 
-        const threatsInterval = setInterval(() => {
-            const newAlert = getRandomAlert();
-            setActiveThreats(prev => [newAlert, ...prev.slice(0, 4)]);
-            setActiveThreatsCount(prev => prev + 1);
-        }, 15000);
+    //     const threatsInterval = setInterval(() => {
+    //         const newAlert = getRandomAlert();
+    //         setActiveThreats(prev => [newAlert, ...prev.slice(0, 4)]);
+    //         setActiveThreatsCount(prev => prev + 1);
+    //     }, 15000);
 
-        // Initialize with some alerts
-        setIgnoredAlerts([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
-        setWronglyClosedAlerts([getRandomAlert(), getRandomAlert()]);
-        setActiveThreats([getRandomAlert(), getRandomAlert()]);
+    //     // Initialize with some alerts
+    //     setIgnoredAlerts([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
+    //     setWronglyClosedAlerts([getRandomAlert(), getRandomAlert()]);
+    //     setActiveThreats([getRandomAlert(), getRandomAlert()]);
 
-        return () => {
-            clearInterval(ignoredInterval);
-            clearInterval(wronglyClosedInterval);
-            clearInterval(threatsInterval);
-        };
-    }, []);
+    //     return () => {
+    //         clearInterval(ignoredInterval);
+    //         clearInterval(wronglyClosedInterval);
+    //         clearInterval(threatsInterval);
+    //     };
+    // }, []);
 
     return (
         <div>
