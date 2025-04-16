@@ -7,7 +7,7 @@ import { steps } from '../utils/stepsData'
 const StepFlow = () => {
     const [activeStep, setActiveStep] = useState(0);
 
-    // Cycle through steps
+    // Cycling through steps
     useEffect(() => {
         const interval = setInterval(() => {
             setActiveStep(prev => (prev + 1) % steps.length);
@@ -17,7 +17,7 @@ const StepFlow = () => {
     }, []);
 
     return (
-        <div className="relative mb-16">
+        <div className="relative mb-14">
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-700 -translate-y-1/2 z-0" />
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -38,7 +38,7 @@ const StepFlow = () => {
                         }}
                     >
                         <div className="flex flex-col items-center text-center">
-                            <div className="mb-3">{step.icon}</div>
+                            <div className="mb-3"><step.icon size={24} className={step.iconClassName} /></div>
                             <h3 className="text-lg font-semibold mb-1">{step.title}</h3>
                             <p className="text-sm text-gray-300">{step.description}</p>
                         </div>

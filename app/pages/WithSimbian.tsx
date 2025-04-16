@@ -1,13 +1,10 @@
 "use client";
 
-// import AlertCard from "../components/AlertCard";
+import AlertCard from "../components/AlertCard";
 import StepFlow from "../components/StepFlow";
 import ContentCard from "../components/ContentCard";
-
-import { MdOutlineMonitor } from "react-icons/md";
-import { GoShieldCheck } from "react-icons/go";
-import { FaRegCircleCheck } from "react-icons/fa6";
-// import { FaCheck } from "react-icons/fa";
+import { contentDataWithSimbian } from "../utils/contentData";
+import { FaCheck } from "react-icons/fa";
 
 export default function WithSimbian() {
     return (
@@ -19,32 +16,26 @@ export default function WithSimbian() {
             {/* added steps Flow Component */}
             <StepFlow />
 
-            <div className="flex">
+            <div className="flex px-10 items-baseline justify-around">
 
                 {/* sample content messages */}
                 <div className="flex flex-col items-center justify-evenly gap-4 mr-8">
-                    <ContentCard
-                        title="90% of alerts resolved automatically, 24/7"
-                        className="bg-green-400/10"
-                        icon={<FaRegCircleCheck size={24} className="text-green-600" />}
-                    />
-                    <ContentCard
-                        title="Correlates alerts to your environment"
-                        className="bg-green-400/10"
-                        icon={<MdOutlineMonitor size={24} className="text-green-600" />}
-                    />
-                    <ContentCard
-                        title="Investigate every alert—no SOAR needed"
-                        className="bg-green-400/10"
-                        icon={<GoShieldCheck size={24} className="text-green-600" />}
-                    />
+                    {contentDataWithSimbian.map((data) => (
+                        <ContentCard
+                            key={data.title}
+                            title={data.title}
+                            className={data.className}
+                            icon={<data.icon size={24} className="text-green-600" />}
+                        />
+                    ))}
                 </div>
 
                 {/* Cards with zero counts */}
-                {/* <div className="flex flex-col items-center justify-evenly gap-4">
+                <div className="flex flex-col items-center justify-evenly gap-4">
                     <AlertCard
                         title="Ignored Alerts"
-                        count={0}
+                        countStart={200}
+                        countEnd={0}
                         icon={<FaCheck size={24} className="text-green-500" />}
                         color="bg-green-900/30"
                         alerts={[]}
@@ -53,7 +44,8 @@ export default function WithSimbian() {
 
                     <AlertCard
                         title="Wrongly Closed Alerts"
-                        count={0}
+                        countStart={35}
+                        countEnd={0}
                         icon={<FaCheck size={24} className="text-green-500" />}
                         color="bg-green-900/30"
                         alerts={[]}
@@ -62,13 +54,14 @@ export default function WithSimbian() {
 
                     <AlertCard
                         title="Active Threats"
-                        count={0}
+                        countStart={5}
+                        countEnd={0}
                         icon={<FaCheck size={24} className="text-green-500" />}
                         color="bg-green-900/30"
                         alerts={[]}
                         withSimbian={true}
                     />
-                </div> */}
+                </div>
             </div>
         </div>
     );
