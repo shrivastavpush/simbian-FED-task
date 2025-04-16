@@ -6,6 +6,7 @@ import ContentCard from "../components/ContentCard";
 import { AlertItemData, getRandomAlert } from "../data/alertItemData";
 import { WithoutSimbianAlertCards } from "../data/alertCardData";
 import { contentDataWithoutSimbian } from "../data/contentData";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function WithoutSimbian() {
     const [ignoredCount, setIgnoredCount] = useState(200);
@@ -49,62 +50,105 @@ export default function WithoutSimbian() {
     }, []);
 
     return (
-        <>
-            <h2 className="text-3xl font-bold text-center mb-8 text-red-500">
-                Without Simbian
-            </h2>
+        <AnimatePresence>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 40 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                key="without-simbian-section"
+            >
+                <motion.h2
+                    className="text-3xl font-bold text-center mb-8 text-red-500"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15, duration: 0.5, ease: "easeInOut" }}
+                >
+                    Without Simbian
+                </motion.h2>
 
-            <div className="flex md:flex-row flex-col px-0 md:px-10 items-baseline justify-around gap-6 md:gap-0">
-
-                {/* sample content messages */}
-                <div className="flex flex-col items-center justify-evenly gap-4 mr-8">
-                    {contentDataWithoutSimbian.map((data) => (
-                        <ContentCard
-                            key={data.title}
-                            title={data.title}
-                            className={data.className}
-                            icon={<data.icon size={24} className="text-red-600" />}
-                        />
-                    ))}
-                </div>
-
-                {/* alert boxes */}
-
-                <div className="flex flex-col items-center gap-4">
-                    {WithoutSimbianAlertCards.map((data) => {
-                        let count = 0;
-                        let alerts: AlertItemData[] = [];
-
-                        switch (data.type) {
-                            case "ignored":
-                                count = ignoredCount;
-                                alerts = ignoredAlerts;
-                                break;
-                            case "wronglyClosed":
-                                count = wronglyClosedCount;
-                                alerts = wronglyClosedAlerts;
-                                break;
-                            case "active":
-                                count = activeThreatsCount;
-                                alerts = activeThreats;
-                                break;
-                        }
-
-                        return (
-                            <AlertCard
+                <div className="flex md:flex-row flex-col px-0 md:px-10 items-baseline justify-around gap-6 md:gap-0">
+                    {/* sample content messages */}
+                    <motion.div
+                        className="flex flex-col items-center justify-evenly gap-4 mr-8"
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: {},
+                            visible: {
+                                transition: { staggerChildren: 0.12 }
+                            }
+                        }}
+                    >
+                        {contentDataWithoutSimbian.map((data, idx) => (
+                            <motion.div
                                 key={data.title}
-                                title={data.title}
-                                countStart={data.countStart}
-                                countEnd={count}
-                                icon={<data.icon size={24} className="text-red-600" />}
-                                color={data.color}
-                                alerts={alerts}
-                                withSimbian={data.withSimbian}
-                            />
-                        );
-                    })}
+                                initial={{ opacity: 0, x: -30 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.2 + idx * 0.12, ease: "easeOut" }}
+                            >
+                                <ContentCard
+                                    title={data.title}
+                                    className={data.className}
+                                    icon={<data.icon size={24} className="text-red-600" />}
+                                />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    {/* alert boxes */}
+                    <motion.div
+                        className="flex flex-col items-center gap-4"
+                        initial="hidden"
+                        animate="visible"
+                        variants={{
+                            hidden: {},
+                            visible: {
+                                transition: { staggerChildren: 0.13 }
+                            }
+                        }}
+                    >
+                        {WithoutSimbianAlertCards.map((data, idx) => {
+                            let count = 0;
+                            let alerts: AlertItemData[] = [];
+
+                            switch (data.type) {
+                                case "ignored":
+                                    count = ignoredCount;
+                                    alerts = ignoredAlerts;
+                                    break;
+                                case "wronglyClosed":
+                                    count = wronglyClosedCount;
+                                    alerts = wronglyClosedAlerts;
+                                    break;
+                                case "active":
+                                    count = activeThreatsCount;
+                                    alerts = activeThreats;
+                                    break;
+                            }
+
+                            return (
+                                <motion.div
+                                    key={data.title}
+                                    initial={{ opacity: 0, x: 30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.55, delay: 0.35 + idx * 0.13, ease: "easeOut" }}
+                                >
+                                    <AlertCard
+                                        title={data.title}
+                                        countStart={data.countStart}
+                                        countEnd={count}
+                                        icon={<data.icon size={24} className="text-red-600" />}
+                                        color={data.color}
+                                        alerts={alerts}
+                                        withSimbian={data.withSimbian}
+                                    />
+                                </motion.div>
+                            );
+                        })}
+                    </motion.div>
                 </div>
-            </div>
-        </>
+            </motion.div>
+        </AnimatePresence>
     );
 }

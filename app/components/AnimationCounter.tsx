@@ -13,7 +13,7 @@ export default function AnimationCounter({ from, to, nodeRef }:
         if (!node) return;
 
         const controls = animate(from, to, {
-            duration: 1,
+            duration: 2,
             onUpdate(value) {
                 node.textContent = value.toFixed(0);
             },
