@@ -1,5 +1,3 @@
-"use client";
-
 import AlertCard from "../components/AlertCard";
 import StepFlow from "../components/StepFlow";
 import ContentCard from "../components/ContentCard";

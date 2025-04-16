@@ -12,15 +12,9 @@ export default function WithoutSimbian() {
     const [wronglyClosedCount, setWronglyClosedCount] = useState(35);
     const [activeThreatsCount, setActiveThreatsCount] = useState(5);
 
-    const [ignoredAlerts, setIgnoredAlerts] = useState(() => [
-        getRandomAlert(), getRandomAlert(), getRandomAlert()
-    ]);
-    const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState(() => [
-        getRandomAlert(), getRandomAlert(), getRandomAlert()
-    ]);
-    const [activeThreats, setActiveThreats] = useState(() => [
-        getRandomAlert(), getRandomAlert(), getRandomAlert()
-    ]);
+    const [ignoredAlerts, setIgnoredAlerts] = useState<AlertItemData[]>([]);
+    const [wronglyClosedAlerts, setWronglyClosedAlerts] = useState<AlertItemData[]>([]);
+    const [activeThreats, setActiveThreats] = useState<AlertItemData[]>([]);
 
     // Adding new alerts periodically
     useEffect(() => {
@@ -28,19 +22,24 @@ export default function WithoutSimbian() {
             const newAlert = getRandomAlert();
             setIgnoredAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
             setIgnoredCount(prev => prev + 1);
-        }, 3000);
+        }, 5000);
 
         const wronglyClosedInterval = setInterval(() => {
             const newAlert = getRandomAlert();
             setWronglyClosedAlerts(prev => [newAlert, ...prev.slice(0, 4)]);
             setWronglyClosedCount(prev => prev + 1);
-        }, 5000);
+        }, 3000);
 
         const threatsInterval = setInterval(() => {
             const newAlert = getRandomAlert();
             setActiveThreats(prev => [newAlert, ...prev.slice(0, 4)]);
             setActiveThreatsCount(prev => prev + 1);
         }, 4000);
+
+        // setting initial alerts
+        setIgnoredAlerts([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
+        setWronglyClosedAlerts([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
+        setActiveThreats([getRandomAlert(), getRandomAlert(), getRandomAlert()]);
 
         return () => {
             clearInterval(ignoredInterval);

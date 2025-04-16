@@ -30,7 +30,7 @@ export default function AlertCard(
                 <AnimationCounter from={countStart} to={countEnd} nodeRef={nodeRef} />
             </div>
 
-            <div className="space-y-2 max-h-52 overflow-y-auto mt-4">
+            <div className="space-y-2 max-h-34 overflow-y-auto overflow-x-hidden mt-4">
                 <AnimatePresence>
                     {withSimbian ? (
                         <motion.div
